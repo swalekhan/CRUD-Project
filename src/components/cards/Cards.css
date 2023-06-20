@@ -1,0 +1,90 @@
+
+
+ .cards {
+    margin: 20px;
+  }
+  
+  .cards_container {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    column-gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+
+  .card {
+    background-color: #f4f4f4;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+  }
+  
+  .card h2 {
+    margin: 0;
+    font-size: 24px;
+  }
+  
+  .card h4 {
+    margin: 10px 0;
+    font-size: 18px;
+  }
+  
+  .card p {
+    margin: 5px 0;
+    font-size: 16px;
+  }
+  
+  .btn_div {
+    margin-top: 10px;
+  }
+  
+  .btn {
+    padding: 8px 16px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .btn_edit {
+    background-color: #2196f3;
+    color: #fff;
+  }
+  
+  .btn_delete {
+    background-color: #f44336;
+    color: #fff;
+  }
+  
+  .add_card_btn {
+    position: fixed;
+    right: 50px;
+    bottom: 50px;
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #4caf50;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .add_card_btn:hover {
+    background-color: #45a049;
+  }
+  
+
+  @media (max-width: 850px) {
+    .cards_container{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 650px) {
+    .cards_container {
+        grid-template-columns: 1fr;
+    }
+} 
