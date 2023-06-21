@@ -52,6 +52,7 @@
   .btn_edit {
     background-color: #2196f3;
     color: #fff;
+    text-decoration: none;
   }
   
   .btn_delete {

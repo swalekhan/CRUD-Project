@@ -1,24 +1,31 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useFormik } from 'formik';
-import { formValidation, intialState } from '../utils';
-import { useParams } from 'react-router-dom';
+import { formValidation } from '../utils';
+import { useLocation, useParams } from 'react-router-dom';
 import useHttps from '../hook/useHttps';
 import { useNavigate } from 'react-router-dom';
 
 const EditCardPage = () => {
-    const { fetchDataById, data, error, isLoading, updateData } = useHttps()
+    const { updateData } = useHttps()
     const { id } = useParams()
     const navigate = useNavigate()
+    const { state } = useLocation()
 
     // Initialize Formik for form management.........................................?
-    const { values, setValues, errors, handleBlur, handleChange, handleSubmit, touched } = useFormik({
-        initialValues: intialState,
+    const { values, errors, handleBlur, handleChange, handleSubmit, touched } = useFormik({
+        initialValues: {
+            firstName: state.firstName || '',
+            lastName: state.lastName || '',
+            email: state.email || '',
+            phone: state.phone || '',
+            address: state.address || '',
+        },
         validationSchema: formValidation,
 
         // Handle form submission................................
-        onSubmit: async( data )=> {
+        onSubmit: async (data) => {
             // Update data with the provided ID
-           await updateData({
+            await updateData({
                 ...data,
                 id,
             })
@@ -27,33 +34,6 @@ const EditCardPage = () => {
             navigate("/")
         },
     });
-
-    useEffect(() => {
-        // Set initial form values using the fetched data 
-        const initialValues = {
-            firstName: data?.firstName || '',
-            lastName: data?.lastName || '',
-            email: data?.email || '',
-            phone: data?.phone || '',
-            address: data?.address || '',
-        };
-        setValues(initialValues);
-    }, [setValues, data]);
-
-    // Fetch data for the specified ID...................................?
-    useEffect(() => {
-        fetchDataById(`https://dummyapi-68e6f-default-rtdb.firebaseio.com/cards/${id}.json`);
-    }, [id, fetchDataById])
-
-    // Display loading state while data is being fetched...................
-    if (isLoading) {
-        return <div className='loading'>Loading...</div>;
-    }
-
-    // Handle error state.............
-    if (error) {
-        return <div>Error: {error.message}</div>;
-    }
 
     return (
         <section className='card_form'>

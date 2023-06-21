@@ -8,10 +8,10 @@ const useHttps = () => {
     const [isLoading, setIsLoading] = useState(false);
 
 
-    const fetchData = useCallback(async (url) => {
+    const fetchData = useCallback(async () => {
         setIsLoading(true);
         try {
-            const response = (await axios.get(url)).data;
+            const response = (await axios.get(`${initialUrl}.json`)).data;
             let arr = []
             for (let key in response) {
                 arr.push({ ...response[key], id: key })
@@ -22,20 +22,6 @@ const useHttps = () => {
         } finally {
             setIsLoading(false);
         }
-    }, []);
-
-
-    const fetchDataById = useCallback(async (url) => {
-        setIsLoading(true);
-        try {
-            const response = (await axios.get(url)).data;
-            setData(response);
-        } catch (error) {
-            setError(error);
-        } finally {
-            setIsLoading(false);
-        }
-
     }, []);
 
     const createData = async (payload) => {
@@ -51,7 +37,7 @@ const useHttps = () => {
     };
 
     const updateData = async (payload) => {
-        setIsLoading(true);
+        setIsLoading(false);
         try {
             const response = (await axios.put(`${initialUrl}/${payload.id}.json`, payload)).data;
             setData(response)
@@ -74,7 +60,7 @@ const useHttps = () => {
         }
     };
 
-    return { data, error, isLoading, fetchData, createData, updateData, deleteData, fetchDataById };
+    return { data, error, isLoading, fetchData, createData, updateData, deleteData };
 };
 
 export default useHttps;

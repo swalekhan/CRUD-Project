@@ -4,11 +4,11 @@ import useHttps from "../hook/useHttps";
 
 const CardsPage = () => {
     // Fetch data and handle errors using custom hook.....
-    const { data, error,isLoading, fetchData, deleteData } = useHttps()
+    const { data, error, isLoading, fetchData, deleteData } = useHttps()
 
     useEffect(() => {
         // Fetch data when the component mounts...
-        fetchData("https://dummyapi-68e6f-default-rtdb.firebaseio.com/cards.json")
+        fetchData()
     }, [fetchData])
 
     // Delete card handler...........

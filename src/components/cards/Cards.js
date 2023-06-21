@@ -1,8 +1,7 @@
 import './Cards.css'
-import { useNavigate,Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const Cards = ({ data, deleteHandler }) => {
-    const navigate = useNavigate()
 
     return (
         <section className='cards'>
@@ -15,7 +14,7 @@ const Cards = ({ data, deleteHandler }) => {
                             <p>Email: <span>{item?.email}</span></p>
                             <p>Phone: <span>{item?.phone}</span></p>
                             <div className='btn_div'>
-                                <button className='btn_edit btn' onClick={() => navigate(`/editCard/${item?.id}`)}>Edit</button>
+                                <Link className='btn_edit btn' to={`/editCard/${item?.id}`} state={item}>Edit</Link>
                                 <button className='btn_delete btn' onClick={() => deleteHandler(item?.id)}>Delete</button>
                             </div>
                         </li>
